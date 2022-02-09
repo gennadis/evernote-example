@@ -9,7 +9,7 @@ These scripts covers basic [Evernote](https://evernote.com/) API operations.
 
 ## Getting Evernote API access
 1. Sing up to Evernote Developer Sandbox [https://sandbox.evernote.com/](https://sandbox.evernote.com/)
-2. Request an Evernote API Key [https://dev.evernote.com/#apikey](https://dev.evernote.com/#apikey)
+2. Request an Evernote API Key [https://dev.evernote.com/#apikey](https://dev.evernote.com/#apikey)  
 IMPORTANT! Select `Full Access` API permissions level to get these scripts working.
 3. Get Developer token [https://sandbox.evernote.com/api/DeveloperToken.action](https://sandbox.evernote.com/api/DeveloperToken.action)
 
