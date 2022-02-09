@@ -1,5 +1,6 @@
-beautifulsoup4==4.6.0
+beautifulsoup4==4.10.0
 python-dotenv==0.19.2
+oauth2-1.9.0.post1
 
 # https://github.com/Skactor/evernote-sdk-python3'
 evernote3==1.25.14
