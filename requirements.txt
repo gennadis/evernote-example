@@ -1,4 +1,5 @@
-evernote==1.25.3
 beautifulsoup4==4.6.0
-pydantic[dotenv]==1.8.2
 python-dotenv==0.19.2
+
+# https://github.com/Skactor/evernote-sdk-python3'
+evernote3==1.25.14
