@@ -36,7 +36,7 @@ if __name__ == "__main__":
         description='Adds note to notebook "Дневник", uses template note'
     )
     parser.add_argument(
-        name_or_flags="date",
+        dest="date",
         nargs="?",
         type=is_valid_date,
         help='date in format "YYYY-MM-DD"',
@@ -64,9 +64,9 @@ if __name__ == "__main__":
     print(json.dumps(obj=context, ensure_ascii=False, indent=4))
 
     new_note = noteStore.copyNote(journal_template_note_guid, journal_notebook_guid)
-    utitle_without_comment = new_note.title.decode("utf8").split("#", 1)[0]
+    utitle_without_comment = new_note.title.split("#", 1)[0]
     utitle = utitle_without_comment.strip().format(**context)
-    new_note.title = utitle.encode("utf8")
+    new_note.title = f"{utitle} copy note"
     noteStore.updateNote(new_note)
 
     print(f"Note created: {utitle}")
