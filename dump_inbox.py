@@ -32,7 +32,11 @@ if __name__ == "__main__":
         description="Dumps notes from Evernote inbox to console"
     )
     parser.add_argument(
-        "number", nargs="?", type=int, default=10, help="number of records to dump"
+        name_or_flags="number",
+        nargs="?",
+        type=int,
+        default=10,
+        help="number of records to dump",
     )
     args = parser.parse_args()
 
@@ -48,7 +52,7 @@ if __name__ == "__main__":
     # print('Notes', notes)
 
     for counter, note in enumerate(notes, start=1):
-        print("\n--------- %s ---------" % counter)
+        print(f"\n--------- {counter} ---------")
         content = note_store.getNoteContent(
             note.guid
         )  # kwargs will be skipped by api because of bug
