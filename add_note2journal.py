@@ -18,15 +18,16 @@ WEEK_DAYS = {
 }
 
 
-def is_valid_date(text):
+def is_valid_date(text: str) -> date:
     text = text.strip()
     if text.startswith("-") or text.startswith("+") or text.isdigit():
         return date.today() + timedelta(days=int(text))
-    try:
 
+    try:
         return datetime.strptime(text, "%Y-%m-%d").date()
+
     except ValueError:
-        msg = "Not a valid date: '{0}'.".format(text)
+        msg = f"Not a valid date: '{text}'."
         raise argparse.ArgumentTypeError(msg)
 
 
@@ -35,7 +36,10 @@ if __name__ == "__main__":
         description='Adds note to notebook "Дневник", uses template note'
     )
     parser.add_argument(
-        "date", nargs="?", type=is_valid_date, help='date in format "YYYY-MM-DD"'
+        name_or_flags="date",
+        nargs="?",
+        type=is_valid_date,
+        help='date in format "YYYY-MM-DD"',
     )
     args = parser.parse_args()
 
@@ -45,7 +49,8 @@ if __name__ == "__main__":
     journal_notebook_guid = os.getenv("JOURNAL_NOTEBOOK_GUID")
 
     client = EvernoteClient(
-        token=evernote_personal_token, sandbox=False  # Default: True
+        token=evernote_personal_token,
+        sandbox=False,  # Default: True
     )
     noteStore = client.get_note_store()
 
@@ -54,8 +59,9 @@ if __name__ == "__main__":
         "date": day.isoformat(),
         "dow": WEEK_DAYS[day.isoweekday()],
     }
+
     print("Title Context is:")
-    print(json.dumps(context, ensure_ascii=False, indent=4))
+    print(json.dumps(obj=context, ensure_ascii=False, indent=4))
 
     new_note = noteStore.copyNote(journal_template_note_guid, journal_notebook_guid)
     utitle_without_comment = new_note.title.decode("utf8").split("#", 1)[0]
@@ -63,5 +69,5 @@ if __name__ == "__main__":
     new_note.title = utitle.encode("utf8")
     noteStore.updateNote(new_note)
 
-    print("Note created: %s" % utitle)
+    print(f"Note created: {utitle}")
     print("Done")
