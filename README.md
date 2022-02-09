@@ -3,6 +3,7 @@
 These scripts covers basic [Evernote](https://evernote.com/) API operations.
 
 ## Features
+- `Python3` ready!
 - Get notebooks name and GUID
 - Print notes content to terminal
 - Create new note from a template
