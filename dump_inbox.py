@@ -44,7 +44,7 @@ if __name__ == "__main__":
     evernote_personal_token = os.getenv("EVERNOTE_PERSONAL_TOKEN")
     inbox_notebook_guid = os.getenv("INBOX_NOTEBOOK_GUID")
 
-    client = EvernoteClient(token=evernote_personal_token, sandbox=False)
+    client = EvernoteClient(token=evernote_personal_token, sandbox=True)
     note_store = client.get_note_store()
 
     notes = get_notebook_list(note_store, inbox_notebook_guid, args.number).notes

@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     client = EvernoteClient(
         token=evernote_personal_token,
-        sandbox=False,  # Default: True
+        sandbox=True,  # Default: True
     )
     noteStore = client.get_note_store()
 
