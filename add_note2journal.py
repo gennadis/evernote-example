@@ -2,9 +2,10 @@
 from datetime import date, datetime, timedelta
 import argparse
 import json
+import os
 
 from evernote.api.client import EvernoteClient
-from config import Settings
+from dotenv import load_dotenv
 
 
 WEEK_DAYS = {
@@ -38,10 +39,13 @@ if __name__ == '__main__':
                         help='date in format "YYYY-MM-DD"')
     args = parser.parse_args()
 
-    config = Settings()
+    load_dotenv()
+    evernote_personal_token = os.getenv('EVERNOTE_PERSONAL_TOKEN')
+    journal_template_note_guid = os.getenv('JOURNAL_TEMPLATE_NOTE_GUID')
+    journal_notebook_guid = os.getenv('JOURNAL_NOTEBOOK_GUID')
 
     client = EvernoteClient(
-        token=config.EVERNOTE_PERSONAL_TOKEN,
+        token=evernote_personal_token,
         sandbox=False # Default: True
     )
     noteStore = client.get_note_store()
@@ -54,7 +58,7 @@ if __name__ == '__main__':
     print('Title Context is:')
     print(json.dumps(context, ensure_ascii=False, indent=4))
 
-    new_note = noteStore.copyNote(config.JOURNAL_TEMPLATE_NOTE_GUID, config.JOURNAL_NOTEBOOK_GUID)
+    new_note = noteStore.copyNote(journal_template_note_guid, journal_notebook_guid)
     utitle_without_comment = new_note.title.decode('utf8').split('#', 1)[0]
     utitle = utitle_without_comment.strip().format(**context)
     new_note.title = utitle.encode('utf8')
