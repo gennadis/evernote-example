@@ -32,7 +32,7 @@ if __name__ == "__main__":
         description="Dumps notes from Evernote inbox to console"
     )
     parser.add_argument(
-        name_or_flags="number",
+        dest="number",
         nargs="?",
         type=int,
         default=10,
@@ -48,8 +48,6 @@ if __name__ == "__main__":
     note_store = client.get_note_store()
 
     notes = get_notebook_list(note_store, inbox_notebook_guid, args.number).notes
-
-    # print('Notes', notes)
 
     for counter, note in enumerate(notes, start=1):
         print(f"\n--------- {counter} ---------")
